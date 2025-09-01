@@ -1,0 +1,19 @@
+# ...existing code...
+# Add a mock isBadVersion for testing, or import it if provided by the platform
+def isBadVersion(version):
+    # Example: first bad version is 4
+    return version >= 4
+
+class Solution:
+    def firstBadVersion(self, n):
+        def binarySearch(left, right):
+            if left < right:
+                mid = (left + right) // 2
+                if isBadVersion(mid):
+                    return binarySearch(left, mid)
+                else:
+                    return binarySearch(mid + 1, right)
+            return left
+        
+        return binarySearch(1, n)
+# ...existing code...
