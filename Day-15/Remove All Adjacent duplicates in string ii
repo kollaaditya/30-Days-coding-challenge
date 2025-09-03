@@ -1,0 +1,19 @@
+class Solution(object):
+    def removeDuplicates(self, s, k):
+        """
+        :type s: str
+        :type k: int
+        :rtype: str
+        """
+        stack = []  # Each element is [char, count]
+
+        for char in s:
+            if stack and stack[-1][0] == char:
+                stack[-1][1] += 1  # Increment count
+                if stack[-1][1] == k:
+                    stack.pop()  # Remove when count reaches k
+            else:
+                stack.append([char, 1])  # New character
+
+        # Reconstruct the final string
+        return ''.join(char * count for char, count in stack)

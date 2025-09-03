@@ -1,0 +1,18 @@
+class Solution(object):
+    def scoreOfParentheses(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        stack = [0]  # Initialize with 0 score
+
+        for char in s:
+            if char == '(':
+                stack.append(0)  # Start a new score frame
+            else:
+                last = stack.pop()
+                # If last is 0, it means we just closed a "()", which scores 1
+                score = max(2 * last, 1)
+                stack[-1] += score  # Add score to previous frame
+
+        return stack[0]
